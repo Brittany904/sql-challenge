@@ -1,0 +1,80 @@
+SELECT EMPLOYEE.emp_no,
+EMPLOYEE.last_name,
+EMPLOYEE.first_name,
+EMPLOYEE.sex,
+EMPLOYEE.emp_no,
+SALARIES.salary
+FROM EMPLOYEE
+LEFT JOIN SALARIES
+ON EMPLOYEE.emp_no = SALARIES.emp_no
+
+-- Next
+SELECT first_name,
+last_name,
+hire_date
+FROM EMPLOYEE
+WHERE DATE_PART('year', hire_date) = 1986;
+
+--Next
+SELECT MANAGERS.dept_no,
+DEPARTMENTS.dept_name,
+MANAGERS.emp_no,
+EMPLOYEE.last_name,
+EMPLOYEE.first_name
+FROM MANAGERS
+LEFT JOIN DEPARTMENTS
+ON MANAGERS.dept_no = DEPARTMENTS.dept_no
+LEFT JOIN EMPLOYEE
+ON MANAGERS.emp_no = EMPLOYEE.emp_no
+ORDER BY MANAGERS
+
+--Next
+SELECT DEPT_EMP.dept_no,
+EMPLOYEE.emp_no,
+EMPLOYEE.last_name,
+EMPLOYEE.first_name,
+DEPARTMENTS.dept_name
+FROM EMPLOYEE
+INNER JOIN DEPT_EMP
+ON EMPLOYEE.emp_no = DEPT_EMP.emp_no
+INNER JOIN DEPARTMENTS 
+ON DEPARTMENTS.dept_no = DEPT_EMP.dept_no
+
+--Next
+SELECT first_name,
+last_name,
+sex
+FROM EMPLOYEE
+WHERE first_name = 'Hercules'
+AND last_name LIKE 'B%';
+
+--NEXT
+SELECT EMPLOYEE.emp_no,
+EMPLOYEE.last_name,
+EMPLOYEE.first_name,
+DEPT_EMP.dept_no
+FROM EMPLOYEE
+INNER JOIN DEPT_EMP
+ON EMPLOYEE.emp_no = DEPT_EMP.emp_no
+INNER JOIN DEPARTMENTS 
+ON DEPARTMENTS.dept_no = DEPT_EMP.dept_no
+WHERE DEPARTMENTS.dept_name = 'Sales';
+
+--Next
+SELECT EMPLOYEE.emp_no,
+EMPLOYEE.last_name,
+EMPLOYEE.first_name,
+DEPARTMENTS.dept_name
+FROM EMPLOYEE
+INNER JOIN DEPT_EMP
+ON EMPLOYEE.emp_no = DEPT_EMP.emp_no
+INNER JOIN DEPARTMENTS 
+ON DEPARTMENTS.dept_no = DEPT_EMP.dept_no
+WHERE DEPARTMENTS.dept_name 
+IN ('Sales', 'Development');
+
+--Next
+SELECT last_name, COUNT(last_name)
+FROM EMPLOYEE
+GROUP BY last_name
+ORDER BY COUNT(last_name) DESC;
